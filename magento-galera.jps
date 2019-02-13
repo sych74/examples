@@ -55,6 +55,9 @@ onInstall:
 
 actions:
 
+UPDATE global_variables SET variable_value='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' WHERE variable_name='mysql-default_sql_mode';
+LOAD MYSQL VARIABLES TO RUNTIME; SAVE MYSQL VARIABLES TO DISK;
+
   deployMagento:
     - deploy:
         archive: https://github.com/jelastic-jps/magento-cluster/raw/master/releases/${settings.magento_version}
