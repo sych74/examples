@@ -50,6 +50,7 @@ nodes:
 
 
 onInstall:
+    - additionalProxySQlsetup
     - deployMagento
     - setupMagento
 
