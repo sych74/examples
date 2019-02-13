@@ -54,6 +54,10 @@ onInstall:
     - setupMagento
 
 actions:
+  additionalProxySQlsetup:
+    cmd[proxy]: |-
+      
+
   deployMagento:
     - deploy:
         archive: https://github.com/jelastic-jps/magento-cluster/raw/master/releases/${settings.magento_version}
