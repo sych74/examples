@@ -55,6 +55,7 @@ onInstall:
 
 actions:
 
+UPDATE global_variables SET variable_value='10.3.11-MariaDB' WHERE variable_name='mysql-server_version';
 UPDATE global_variables SET variable_value='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' WHERE variable_name='mysql-default_sql_mode';
 LOAD MYSQL VARIABLES TO RUNTIME; SAVE MYSQL VARIABLES TO DISK;
 
