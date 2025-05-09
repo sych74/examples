@@ -1,0 +1,4 @@
+type: install
+name: Logging
+onInstall:
+  log: Logging ---- ${settings.test}
