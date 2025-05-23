@@ -1,4 +1,7 @@
 type: install
 name: Logging
+baseUrl: ${globals.jpsCdnUrl}
+mixing:
+- ${globals.jpsCdnUrl}/examples/test.jps
 onInstall:
-  log: Logging ---- ${settings.test}
+  log: Logging ---- ${settings.test} ---- ${baseUrl}
