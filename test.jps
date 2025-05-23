@@ -4,4 +4,4 @@ baseUrl: ${globals.jpsCdnUrl}
 mixing:
 - ${globals.jpsCdnUrl}/examples/test.jps
 onInstall:
-  log: Logging ---- ${settings.test} ---- ${baseUrl}
+  log: Logging ---- ${settings.test} ---- ${globals.jpsCdnUrl}
