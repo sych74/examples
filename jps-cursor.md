@@ -3,7 +3,7 @@ then baseUrl, followed by globals.
 
 2. Convert the following formats baseUrl: https://raw.githubusercontent.com/ORG/REPO/BRANCH or baseUrl: https://github.com/ORG/REPO/blob/BRANCH to this format baseUrl: https://cdn.jsdelivr.net/gh/ORG/REPO@BRANCH
 
-3. Add cdnUrl: https://cdn.jsdelivr.net/gh as the first item under the globals: section if not exists
+3. Add cdnUrl: https://cdn.jsdelivr.net/gh as the first item under the globals: section if not exists and section exist.
 
 4. Replace all https://raw.githubusercontent.com/ORG/REPO/BRANCH and https://github.com/ORG/REPO/blob/BRANCH URLs with {globals.cdnUrl}/ORG/REPO@BRANCH/...,
 only if the organization is jelastic or jelastic-jps and the URL is not inside the mixins: section.
