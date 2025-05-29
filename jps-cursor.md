@@ -1,4 +1,4 @@
-1. Organize the top-level fields in the manifest file in the following order (if they exist): jpsType, jpsVersion, id, name, categories, logo, homepage, description,
+1. Organize the top-level fields in the manifest file in the following order (if they exist): jpsType or type, jpsVersion, id, name, categories, logo, homepage, description,
 then baseUrl, followed by globals.
 
 2. Convert the following formats baseUrl: https://raw.githubusercontent.com/ORG/REPO/BRANCH or baseUrl: https://github.com/ORG/REPO/blob/BRANCH to this format baseUrl: https://cdn.jsdelivr.net/gh/ORG/REPO@BRANCH
