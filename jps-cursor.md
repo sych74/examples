@@ -8,4 +8,4 @@ then baseUrl, followed by globals.
 4. Replace all https://raw.githubusercontent.com/ORG/REPO/BRANCH and https://github.com/ORG/REPO/blob/BRANCH URLs with {globals.cdnUrl}/ORG/REPO@BRANCH/...,
 only if the organization is jelastic or jelastic-jps and the URL is not inside the mixins: section.
 
-5. In all nested files, replace https://raw.githubusercontent.com/ORG/REPO/BRANCH and https://github.com/ORG/REPO/blob/BRANCH URLs with https://cdn.jsdelivr.net/gh/ORG/REPO@BRANCH/..., but only if the organization is jelastic or jelastic-jps, and the URL is not inside a mixins: block.
+5. In all nested files, replace https://raw.githubusercontent.com/ORG/REPO/BRANCH and https://github.com/ORG/REPO/blob/BRANCH URLs with https://cdn.jsdelivr.net/gh/ORG/REPO@BRANCH/..., but only if the organization is jelastic or jelastic-jps, and the URL is not inside a mixins: or baseUrl: blocks.
