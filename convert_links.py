@@ -1,3 +1,4 @@
+sgi@MacBook-Pro-Henadii projects % cat convert_link.py
 import os
 import re
 import yaml
@@ -25,16 +26,16 @@ def ensure_globals_cdn(content):
     return content
 
 def replace_outside_blocks(content):
-    def replacer(match):
-        full = match.group(0)
-        prefix = match.group(1)
-        if prefix and any(p in prefix for p in ['baseUrl:', 'mixins:']):
-            return full
-        return re.sub(RAW_PATTERN, r"{globals.cdnUrl}/\1/\2@\3\4", full)
-
-    content = re.sub(r"(^.*(?:baseUrl:|mixins:).*$|.*https://raw\.githubusercontent\.com/jelastic(?:-jps)?/[^ \n]+)", replacer, content, flags=re.MULTILINE)
-    content = re.sub(r"(^.*(?:baseUrl:|mixins:).*$|.*https://github\.com/jelastic(?:-jps)?/[^ \n]+)", replacer, content, flags=re.MULTILINE)
-    return content
+    lines = content.splitlines()
+    new_lines = []
+    for line in lines:
+        if 'baseUrl:' in line or 'mixins:' in line:
+            new_lines.append(line)
+            continue
+        line = re.sub(RAW_PATTERN, CDN_TEMPLATE, line)
+        line = re.sub(GITHUB_PATTERN, CDN_TEMPLATE, line)
+        new_lines.append(line)
+    return '\n'.join(new_lines)
 
 def hard_replace(content):
     content = re.sub(RAW_PATTERN, CDN_TEMPLATE, content)
@@ -52,8 +53,11 @@ def is_text_file(filepath):
 def process_file(file_path):
     if not is_text_file(file_path):
         return
+
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
+
+    had_trailing_newline = content.endswith('\n')
 
     original = content
     content = replace_base_url(content)
@@ -61,20 +65,25 @@ def process_file(file_path):
     content = replace_outside_blocks(content)
     content = hard_replace(content)
 
+    if had_trailing_newline and not content.endswith('\n'):
+        content += '\n'
+
     if content != original:
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(content)
         print(f"✔ Updated: {file_path}")
 
 def walk_directory(root_dir):
-    for dirpath, _, filenames in os.walk(root_dir):
+    for dirpath, dirnames, filenames in os.walk(root_dir):
+        if '.git' in dirnames:
+            dirnames.remove('.git')  # Исключаем .git
         for file in filenames:
             full_path = os.path.join(dirpath, file)
             process_file(full_path)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Recursively update GitHub/raw URLs to CDN format.")
-    parser.add_argument('-p', '--path', default='.', help='Root directory to start from')
+    parser = argparse.ArgumentParser(description="Recursively convert GitHub/raw links to jsDelivr CDN format.")
+    parser.add_argument('-p', '--path', default='.', help='Path to root directory')
     args = parser.parse_args()
 
     walk_directory(args.path)
